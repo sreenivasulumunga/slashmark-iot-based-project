@@ -1,0 +1,48 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+
+class AirQualityMonitor {
+private:
+    int ppmThreshold;
+    int currentPPM;
+
+public:
+    AirQualityMonitor(int threshold) : ppmThreshold(threshold), currentPPM(0) {}
+
+    void setRandomPPM() {
+        currentPPM = rand() % 401;  // Simulating PPM values between 0 and 400
+    }
+
+    void displayPPM() {
+        std::cout << "Current Air Quality: " << currentPPM << " PPM" << std::endl;
+    }
+
+    void checkAirQuality() {
+        if (currentPPM > ppmThreshold) {
+            std::cout << "Air quality deteriorating! Triggering alarm." << std::endl;
+            // Add code here to trigger an alarm (e.g., send notification, sound alarm)
+        }
+    }
+
+    void saveLog() {
+        // Add code here to save logs for future analysis
+        std::cout << "Log saved for future analysis." << std::endl;
+    }
+};
+
+int main() {
+    srand(time(0));  // Seed for random values
+
+    AirQualityMonitor airMonitor(150);  // Set the PPM threshold
+
+    for (int i = 0; i < 5; ++i) {
+        airMonitor.setRandomPPM();
+        airMonitor.displayPPM();
+        airMonitor.checkAirQuality();
+        airMonitor.saveLog();
+        std::cout << "---------------------" << std::endl;
+    }
+
+    return 0;
+}
